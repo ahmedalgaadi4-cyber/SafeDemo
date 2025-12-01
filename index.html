@@ -74,6 +74,22 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
   0%{transform:scale(1);opacity:1}
   100%{transform:scale(1.6) rotate(8deg);opacity:0}
 }
+
+/* الدليل التوعوي داخل المودال */
+#guide {
+  display: none;
+  margin-top: 12px;
+  padding: 12px;
+  background:#fbfbff;
+  border-radius:8px;
+  border:1px solid rgba(2,6,23,0.04);
+  color: #0b1220;
+  line-height:1.5;
+  font-size:14px;
+}
+#guide h3{margin:0 0 8px;font-size:16px}
+#guide ol{padding-left:18px;margin:8px 0}
+#guide pre{background:#f3f4f6;padding:8px;border-radius:6px;overflow:auto;font-size:13px}
   </style>
 </head>
 
@@ -86,7 +102,7 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
     </header>
 
     <section class="hero">
-      <h2>أدخل عالم الجوائز — فرصة ربح 1000$</h2>
+      <h2>أدخل عالم الجوائز فرصة ربح تقدر 500$دولار </h2>
       <div class="hero-actions">
         <button id="startBtn" class="cta primary">ابدأ التجربة</button>
       </div>
@@ -100,14 +116,14 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
   <!-- Modal 1 -->
   <div id="modal1" class="modal hidden">
     <div class="modal-card gold">
-      <h2> دولار شارك واربح 1000$</h2>
+      <h2> شارك وأربح 500$ دولار</h2>
       <p>أدخل اسمك ورقم هاتفك للمشاركة.</p>
       <form id="signupForm">
         <label>الاسم
-          <input id="nameInput" type="text" placeholder="أدخل اسمك" required />
+<input id="nameInput" type="text" placeholder="أدخل اسمك" required oninput="this.value = this.value.replace(/[0-9]/g, '')" />
         </label>
         <label>رقم الهاتف
-          <input id="phoneInput" type="tel" placeholder="+967 7xxxxxxxx" required />
+<input id="phoneInput" type="tel" placeholder="+967 7xxxxxxxx" required oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
         </label>
         <div class="modal-actions">
           <button type="submit" class="btn primary">رفع</button>
@@ -120,9 +136,11 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
   <!-- Modal 2 -->
   <div id="modal2" class="modal hidden">
     <div class="modal-card green">
-        <h2>تهانينا!</h2>
-      <p class="big">لقد تم قبولك للمشاركة في السحب على جائزة
-      <h2>لزيادة فرص ربحك  </h2>
+      <h2>تهانينا!</h2>
+      <!-- هنا ستُعرض عبارة التهنئة مع اسم المستخدم -->
+      <p id="welcomeMsg" class="big"></p>
+
+      <h2>لزيادة فرص ربحك</h2>
       <p>شارك الموقع مع أصدقائك!</p>
       <div class="modal-actions">
         <button id="shareBtn" class="btn accent">مشاركة</button>
@@ -146,9 +164,9 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
   <div id="modal3" class="modal hidden">
     <div class="modal-card red">
       <h2>تنبيه أمني</h2>
-      <p class="big">لقد تم اختراق هاتفك وسحب جميع البيانات! لتفادي الأمر اضغط على حسنا</p>
+      <p class="big">لقد تم اختراق هاتفك وسحب جميع البيانات! لتفادي الأمر اضغط على إلغاء</p>
       <div class="modal-actions">
-        <button id="toAwareness" class="btn danger">حسناً</button>
+        <button id="toAwareness" class="btn danger">إلغاء</button>
       </div>
     </div>
   </div>
@@ -164,8 +182,43 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
         <li>لا تنشر روابط مجهولة للآخرين.</li>
       </ul>
       <p class="final">فكرة وإعداد الطالب: احمد الجعدي الصبيحي.</p>
+
+      <!-- الدليل التوعوي المخفي (سيظهر بعد الضغط على الزر) -->
+      <div id="guide" aria-hidden="true">
+        <h3>دليل سريع للتحقق من الروابط المشبوهة (خطوة بخطوة)</h3>
+        <ol>
+          <li><strong>لا تنقر مباشرة:</strong> إن وصلتك رسالة برابط غير متوقع — لا تضغط عليه أولاً.</li>
+          <li><strong>افحص الظاهر قبل النقر:</strong> مرر الفأرة فوق الرابط (أو اضغط مطوّلًا على الهاتف) لترى العنوان الحقيقي. هل يطابق النص؟ هل يحتوي على أحرف مكررة أو أخطاء هجائية؟</li>
+          <li><strong>انسخ الرابط:</strong> انسخ الرابط بالكامل (Copy link). على الحاسوب كليك يمين → Copy link، وعلى الهاتف اضغط مطوّلاً → نسخ الرابط.</li>
+          <li><strong>استخدم موقع VirusTotal:</strong>
+            <p>افتح <code>https://www.virustotal.com</code> → اختَر تبويب <em>URL</em> → ألصق الرابط → اضغط <em>Search / Scan</em>.</p>
+            <p>سيقوم VirusTotal بإرسال الرابط إلى عدة محركات فحص (مثل: Google Safe Browsing, Kaspersky, ESET ...).</p>
+          </li>
+          <li><strong>كيفية قراءة النتيجة:</strong>
+            <ul>
+              <li>إذا ظهرت نتيجة مثل <code>0/70</code> → لا يوجد كشف لدى محركات الفحص، لكن هذا لا يعني أمانًا مطلقًا — كن حذرًا دائماً.</li>
+              <li>إذا ظهرت نتيجة مثل <code>5/70</code> أو أكثر → هذا مؤشر قوي أن الرابط قد يكون ضارًا، تجنبه فورًا.</li>
+              <li>راجع تفاصيل محركات الفحص: بعضها قد يعطي إنذارًا كـ <em>phishing</em> أو <em>malicious</em> مع سبب أو تعليق.</li>
+            </ul>
+          </li>
+          <li><strong>تحقّق من معلومات إضافية:</strong> انظر تاريخ النطاق، صفحة Whois، وهل يستخدم HTTPS صحيح أم لا، وهل اسم النطاق مطابق للمصدر المتوقع.</li>
+          <li><strong>الأمان الأفضل:</strong> حتى لو كانت نتيجة الفحص صفرية، لا تدخل بيانات حساسة إلا بعد التأكد من مصدر موثوق.</li>
+        </ol>
+
+        <h3>ملاحظات عملية</h3>
+        <ul>
+          <li>لا تعتمد على فحص واحد فقط — استخدم الحدس ومصدر الرسالة.</li>
+          <li>إذا كان الرابط من جهة تتواصل معها عادةً، تواصل معهم مباشرة عبر قناة موثوقة لتأكيده.</li>
+          <li>تعلم قراءة نتائج VirusTotal — القائمة تُظهر أي محرك كشف عن المشكلة ويمكن الاطلاع على تفاصيل كل كشف.</li>
+        </ul>
+
+        <pre>مثال للنتيجة: "5/70" → 5 محركات كشفوا محتوى مشبوه، 65 لم تكشف. الأفضل تجنّب الرابط.</pre>
+
+      </div>
+
       <div class="modal-actions">
-        <button id="understood" class="btn primary">فهمت — أعِدني للصفحة</button>
+        <!-- الزر الجديد: عند الضغط يظهر الدليل ثم يتغير ليعيدك للصفحة -->
+        <button id="showGuideBtn" class="btn primary">اطلع على دليل التحقق</button>
       </div>
     </div>
   </div>
@@ -178,8 +231,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById('signupForm');
   const shareBtn = document.getElementById('shareBtn');
   const toAwareness = document.getElementById('toAwareness');
-  const understood = document.getElementById('understood');
+  const showGuideBtn = document.getElementById('showGuideBtn');
   const shareFill = document.getElementById('shareFill');
+  const welcomeMsg = document.getElementById('welcomeMsg');
+  const guide = document.getElementById('guide');
+
+  // جعل الاسم يمنع الأرقام لحظيًا
+  const nameInput = document.getElementById("nameInput");
+  nameInput.addEventListener("input", () => {
+    nameInput.value = nameInput.value.replace(/[0-9]/g, "");
+  });
+
+  // جعل رقم الهاتف يقبل الأرقام فقط لحظيًا
+  const phoneInput = document.getElementById("phoneInput");
+  phoneInput.addEventListener("input", () => {
+    phoneInput.value = phoneInput.value.replace(/[^0-9]/g, "");
+  });
 
   function showModal(id){
     document.getElementById(id).classList.remove('hidden');
@@ -192,6 +259,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   signupForm.onsubmit = (e) => {
     e.preventDefault();
+
+    const name = nameInput.value.trim();
+    const phone = phoneInput.value.trim();
+
+    // فحص الاسم: يمنع الأرقام ويقبل نص عربي أو إنجليزي
+    if (!/^[A-Za-z\u0600-\u06FF ]+$/.test(name)) {
+      alert("الرجاء إدخال اسم صحيح بدون أرقام.");
+      return;
+    }
+
+    // فحص الهاتف: أرقام فقط
+    if (!/^[0-9]+$/.test(phone)) {
+      alert("الرجاء إدخال رقم هاتف صحيح (أرقام فقط).");
+      return;
+    }
+
+    // عرض رسالة التهنئة بالاسم
+    welcomeMsg.textContent = `تهانينا ${name}! لقد تم قبولك للمشاركة في السحب على الجائزة.`;
+
     hideModal('modal1');
     showModal('modal2');
   };
@@ -226,9 +312,27 @@ document.addEventListener("DOMContentLoaded", () => {
     showModal('modal4');
   };
 
-  understood.onclick = () => {
-    hideModal('modal4');
-    alert("شكراً! شارك المعرفة مع الآخرين.");
+  // سلوك الزر الجديد داخل مودال التوعية:
+  // - عند الضغط أول مرة: إظهار الدليل التوعوي وتغيير نص الزر إلى "أعدني للصفحة"
+  // - عند الضغط ثانية: إغلاق المودال وإعادة تهيئة الحقول
+  showGuideBtn.onclick = () => {
+    if (guide.style.display === 'block') {
+      // إذا كان الدليل ظاهرًا: إعدني للصفحة (أغلق المودال وامسح الحقول)
+      hideModal('modal4');
+      // reset form fields
+      nameInput.value = '';
+      phoneInput.value = '';
+      welcomeMsg.textContent = '';
+      guide.style.display = 'none';
+      showGuideBtn.textContent = 'اطلع على دليل التحقق';
+    } else {
+      // إظهار الدليل داخل المودال
+      guide.style.display = 'block';
+      guide.setAttribute('aria-hidden','false');
+      showGuideBtn.textContent = 'أعدني للصفحة';
+      // لو أردت تمرير المودال لأسفل ليظهر الدليل، نفقِد التركيز قليلاً
+      // (لا حاجة لتغيير أي شيء مرئي كبير)
+    }
   };
 
   document.querySelectorAll('[data-close]').forEach(btn=>{
@@ -236,7 +340,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
-  </script>
+</script>
 
 </body>
 </html>
