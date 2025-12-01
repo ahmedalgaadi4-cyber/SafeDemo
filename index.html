@@ -6,10 +6,9 @@
   <title>شارك واربح | SafeD</title>
   <meta name="description" content="محاكاة توعوية لموقع 'شارك واربح' لشرح خطر الضغط على روابط مشبوهة وكيف تتجنب الوقوع في الفخ." />
 
-  <!-- ====== CSS مدموج ====== -->
   <style>
 :root{
-  --bg:#fffaf2;
+  --bg:#949c2a;
   --card:#ffffff;
   --muted:#21303b;
   --gold1:#f6c84c;
@@ -151,10 +150,10 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
     </header>
 
     <section class="hero">
-      <h2>أدخل عالم الجوائز فرصة ربح تقدر 500$دولار </h2>
+      <h2>أدخل عالم الجوائز فرصة ربح تقدر 250 ريال سعودي </h2>
       <div class="hero-actions">
         <button id="startBtn" class="cta primary">ابدأ و جرب حظك</button>
-        <button id="sharePageBtn" class="btn ghost" title="انسخ رابط الصفحة">اضغط هنا لنسخ الرابط </button>
+        <!-- زر "انسخ الرابط" تمت إزالته -->
       </div>
     </section>
 
@@ -166,18 +165,18 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
   <!-- Modal 1 -->
   <div id="modal1" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-card gold">
-      <h2> شارك وأربح 500$ دولار</h2>
+      <h2> شارك وأربح 250 ريال سعودي </h2>
       <p>أدخل اسمك ورقم هاتفك للمشاركة.</p>
       <form id="signupForm">
         <label>الاسم
-<input id="nameInput" type="text" placeholder="أدخل اسمك" required oninput="this.value = this.value.replace(/[0-9]/g, '')" />
+<input id="nameInput" type="text" placeholder="أدخل اسمك" required oninput="this.value = this.value.replace(/[0-9\u0660-\u0669]/g, '')" />
         </label>
         <label>رقم الهاتف
 <input id="phoneInput" type="tel" placeholder="+967 7xxxxxxxx" required oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
         </label>
         <div class="modal-actions">
           <button type="submit" class="btn primary">رفع</button>
-          <button type="button" class="btn ghost" data-close="modal1">إلغاء</button>
+          <!--<button type="button" class="btn ghost" data-close="modal1">إلغاء</button> -->
         </div>
       </form>
     </div>
@@ -194,7 +193,7 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
       <p>شارك الموقع مع أصدقائك!</p>
       <div class="modal-actions">
         <button id="shareBtn" class="btn accent">مشاركة</button>
-        <button type="button" class="btn ghost" data-close="modal2">لا الآن</button>
+        <!-- زر "لا الآن" تمت إزالته -->
       </div>
     </div>
   </div>
@@ -219,7 +218,7 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
   <div id="modal3" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-card red">
       <h2>تنبيه أمني</h2>
-      <p class="big">لقد تم اختراق هاتفك وسحب جميع البيانات! لتفادي الأمر اضغط على إلغاء</p>
+      <p class="big">لقد تم اختراقك وسحب جميع البيانات! لتفادي الأمر اضغط على إلغاء</p>
       <div class="modal-actions">
         <button id="toAwareness" class="btn danger">إلغاء</button>
       </div>
@@ -235,6 +234,7 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
         <li>لا تدخل بياناتك في مواقع مجهولة.</li>
         <li>تحقق من الرابط قبل النقر.</li>
         <li>لا تنشر روابط مجهولة للآخرين.</li>
+        <li>    لاتصدق كل ماينشر عبر المواقع من مسابقات وجوائز , عبر هذه الروابط يقع الكثير في الفخاخ والتصيد الأحتيالي ويتم استخدام بياناتك الشخصية للمجهول لسرقتها وربما بيعها  .</li>
       </ul>
       <p class="final">فكرة وإعداد الطالب: احمد الجعدي الصبيحي.</p>
 
@@ -288,7 +288,7 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
       <div class="modal-actions">
         <!-- زر عرض الدليل -->
         <button id="showGuideBtn" class="btn">اطلع على دليل التحقق</button>
-        <!-- زر المشاركة (يفتح قائمة المشاركة أو ينسخ النص) -->
+        <!-- زر المشاركة (يبقى كما هو) -->
         <button id="shareAwareness" class="btn primary">مشاركة</button>
       </div>
     </div>
@@ -312,7 +312,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const exampleLink = document.getElementById('exampleLink');
   const progressCard = document.getElementById('progressCard');
   const countdownEl = document.getElementById('countdown');
-  const sharePageBtn = document.getElementById('sharePageBtn');
+  // sharePageBtn تم إزالته من HTML
 
   // عناصر الإدخال
   const nameInput = document.getElementById("nameInput");
@@ -327,9 +327,10 @@ document.addEventListener("DOMContentLoaded", () => {
       `مرحبًا ${savedName} — شكرًا لمشاركتك في حملة التوعية!`;
   }
 
-  // منع أرقام داخل الاسم لحظيًا
+  // منع أرقام داخل الاسم لحظيًا (الغرب/العربي)
   nameInput.addEventListener("input", () => {
-    nameInput.value = nameInput.value.replace(/[0-9]/g, "");
+    // يزيل 0-9 و٠-٩ (Arabic-Indic digits)
+    nameInput.value = nameInput.value.replace(/[0-9\u0660-\u0669]/g, "");
   });
 
   // السماح بأرقام فقط في الهاتف لحظيًا
@@ -347,7 +348,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(id).setAttribute('aria-hidden','true');
   }
 
-  startBtn.onclick = () => showModal('modal1');
+  // عند الضغط على ابدأ: اخفاء الصفحة الاولى ثم فتح مودال التسجيل
+  startBtn.onclick = () => {
+    const mainPage = document.querySelector('main.page');
+    if (mainPage) mainPage.style.display = 'none';
+    showModal('modal1');
+  };
 
   signupForm.onsubmit = (e) => {
     e.preventDefault();
@@ -378,46 +384,49 @@ document.addEventListener("DOMContentLoaded", () => {
     showModal('modal2');
   };
 
-  shareBtn.onclick = () => {
-    hideModal('modal2');
-    showModal('progressModal');
+  // مشاركة -> عملية التقدم ثم عرض مودال التنبيه
+  if (shareBtn) {
+    shareBtn.onclick = () => {
+      hideModal('modal2');
+      showModal('progressModal');
 
-    shareFill.style.width = '0%';
-    countdownEl.textContent = '3';
-    let start = null, duration = 2000, countdown = 3;
+      shareFill.style.width = '0%';
+      countdownEl.textContent = '3';
+      let start = null, duration = 2000, countdown = 3;
 
-    const countdownInterval = setInterval(()=>{
-      countdown--;
-      if (countdown >= 0) countdownEl.textContent = countdown;
-      if (countdown < 0) clearInterval(countdownInterval);
-    }, 1000);
+      const countdownInterval = setInterval(()=>{
+        countdown--;
+        if (countdown >= 0) countdownEl.textContent = countdown;
+        if (countdown < 0) clearInterval(countdownInterval);
+      }, 1000);
 
-    function anim(ts){
-      if(!start) start = ts;
+      function anim(ts){
+        if(!start) start = ts;
 
-      let pct = Math.min(100, ((ts - start)/duration)*100);
-      shareFill.style.width = pct + '%';
+        let pct = Math.min(100, ((ts - start)/duration)*100);
+        shareFill.style.width = pct + '%';
 
-      if(pct < 100){
-        requestAnimationFrame(anim);
-      } else {
-        progressCard.classList.add('shake');
+        if(pct < 100){
+          requestAnimationFrame(anim);
+        } else {
+          progressCard.classList.add('shake');
 
-        const rect = document.querySelector('.progress-rect');
-        rect.classList.add('explode');
+          const rect = document.querySelector('.progress-rect');
+          rect.classList.add('explode');
 
-        setTimeout(()=>{
-          progressCard.classList.remove('shake');
-          rect.classList.remove('explode');
-          hideModal('progressModal');
-          showModal('modal3');
-          countdownEl.textContent = '3';
-        }, 700);
+          setTimeout(()=>{
+            progressCard.classList.remove('shake');
+            rect.classList.remove('explode');
+            hideModal('progressModal');
+            showModal('modal3');
+            countdownEl.textContent = '3';
+          }, 700);
+        }
       }
-    }
 
-    requestAnimationFrame(anim);
-  };
+      requestAnimationFrame(anim);
+    };
+  }
 
   toAwareness.onclick = () => {
     hideModal('modal3');
@@ -427,24 +436,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (card) card.scrollTop = 0;
   };
 
-  // زر عرض/إخفاء الدليل
+  // زر عرض الدليل: فقط يظهر/يخفي الدليل لكن لا يغيّر النص إلى "أغلق الدليل"
   showGuideBtn.onclick = () => {
     if (guide.style.display === 'block') {
-
-      hideModal('modal4');
-      nameInput.value = '';
-      phoneInput.value = '';
-      welcomeMsg.textContent = '';
       guide.style.display = 'none';
       guide.setAttribute('aria-hidden','true');
-      showGuideBtn.textContent = 'اطلع على دليل التحقق';
-
+      // لا نغير نص الزر — يظل "اطلع على دليل التحقق"
     } else {
-
       guide.style.display = 'block';
       guide.setAttribute('aria-hidden','false');
-      showGuideBtn.textContent = 'أغلق الدليل';
-
+      // مرّره لمكان الدليل
       const card = document.querySelector('#modal4 .modal-card');
       if (card) {
         setTimeout(()=>{
@@ -467,19 +468,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  sharePageBtn.onclick = async () => {
-    const pageUrl = location.href.split('?')[0];
-
-    try {
-      await navigator.clipboard.writeText(pageUrl);
-      sharePageBtn.textContent = 'رابط الصفحة نُسخ!';
-      setTimeout(()=> sharePageBtn.textContent = 'مشاركة الوعي', 1800);
-    } catch (err) {
-      alert('نسخ الرابط غير متاح في المتصفح.');
-    }
-  };
-
-  // زر المشاركة التي تحاكي سلوك المحتال (لكن للتوعية)
+  // زر المشاركة النهائية - يستخدم Web Share API عند الإمكان
   shareAwareness.onclick = async () => {
     const shareText =
       "🔥 فرصة ربح 500$ مجانًا!\n" +
