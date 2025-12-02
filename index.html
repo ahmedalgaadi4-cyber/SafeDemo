@@ -162,6 +162,15 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
     </footer>
   </main>
 
+  <!-- Modal Waiting -->
+<div id="waitingModal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-card gold">
+    <h2>يتم اختيارك في القرعة...</h2>
+    <p style="text-align:center;font-weight:bold;color:#b45309">الرجاء الانتظار...</p>
+  </div>
+</div>
+
+
   <!-- Modal 1 -->
   <div id="modal1" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-card gold">
@@ -219,7 +228,7 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
     <div class="modal-card red">
       <h2>  تنبيه أمني! أختراااااق</h2>
      <!--<p class="big">لقد تم اختراقك او تسريب وسحب جميع البيانات! لتفادي الأمر اضغط على إلغاء</p>--> 
-     <p class="big">يحاول الموقع في الخلفبة الوصول إلى بيانات حساسة مثل الصور وجهات الاتصال لديك! اضغط على إلغاء فورًاp>
+     <p class="big">يحاول الموقع في الخلفبة الوصول إلى بيانات حساسة مثل الصور وواتساب وجهات الاتصال لديك! اضغط على إلغاء فورًاp>
       <div class="modal-actions">
         <button id="toAwareness" class="btn danger">إلغاء</button>
       </div>
@@ -379,11 +388,18 @@ document.addEventListener("DOMContentLoaded", () => {
       console.warn('localStorage not available', err);
     }
 
-    welcomeMsg.textContent =
-      `تهانينا ${name}! لقد تم قبولك للمشاركة في السحب على الجائزة.`;
+    // عرض مودال الانتظار لمدة 3 ثوانٍ
+hideModal('modal1');
+showModal('waitingModal');
 
-    hideModal('modal1');
-    showModal('modal2');
+setTimeout(() => {
+  hideModal('waitingModal');
+  // عرض رسالة التهنئة بالاسم
+  welcomeMsg.textContent =
+    `تهانينا ${name}! لقد تم قبولك للمشاركة في السحب على الجائزة.`;
+  showModal('modal2');
+}, 3000);
+
   };
 
   // مشاركة -> عملية التقدم ثم عرض مودال التنبيه
