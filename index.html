@@ -29,7 +29,7 @@ body{
   color:var(--muted); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
 }
 .page{min-height:100vh;display:flex;flex-direction:column;align-items:stretch}
-.site-header{padding:18px;background:linear-gradient(90deg,#fffefb,#fff7e6);border-bottom:1px solid rgba(15,23,42,0.03)}
+.site-header{padding:18px;background:linear-gradient(90deg,#fbfffb,#ae1a1a);border-bottom:1px solid rgba(15,23,42,0.03)}
 .brand h1{margin:0;font-size:20px;color:#0b1220}
 .brand .welcome{font-size:13px;color:#4b5563;margin-top:6px}
 
@@ -57,7 +57,7 @@ body{
   max-width:520px;
   border-radius:12px;
   padding:18px;
-  background:rgba(255,255,255,0.98);
+  background:rgba(83, 86, 195, 0.98);
   box-shadow:0 26px 60px rgba(2,6,23,0.12);
   /* new: scroll + fade-in */
   max-height: 80vh;
@@ -192,7 +192,7 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
       <h2>لزيادة فرص ربحك</h2>
       <p>شارك الموقع مع أصدقائك!</p>
       <div class="modal-actions">
-        <button id="shareBtn" class="btn accent">مشاركة</button>
+        <button id="shareBtn" class="btn accent">حسنا</button>
         <!-- زر "لا الآن" تمت إزالته -->
       </div>
     </div>
@@ -217,8 +217,9 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
   <!-- Modal 3 -->
   <div id="modal3" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-card red">
-      <h2> تنبيه أمني</h2>
-      <p class="big">لقد تم اختراقك او تسريب وسحب جميع البيانات! لتفادي الأمر اضغط على إلغاء</p>
+      <h2>  تنبيه أمني</h2>
+     <!--<p class="big">لقد تم اختراقك او تسريب وسحب جميع البيانات! لتفادي الأمر اضغط على إلغاء</p>--> 
+     <p class="big">يحاول الموقع في الخلفبة الوصول إلى بيانات حساسة مثل الصور وجهات الاتصال لديك! اضغط على إلغاء فورًاp>
       <div class="modal-actions">
         <button id="toAwareness" class="btn danger">إلغاء</button>
       </div>
