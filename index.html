@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>شارك واربح | SafeD</title>
- <meta name="description" content=" لا تتردد شارك واربح معنا الان هناك الكثير من المسابقات والجوائز في انتظارك , جرب حظك السعيد الان ." /> 
- 
+  <meta name="description" content=" لا تتردد شارك واربح معنا الان هناك الكثير من المسابقات والجوائز في انتظارك , جرب حظك السعيد الان ." /> 
+
   <style>
 :root{
   --bg:#949c2a;
@@ -33,6 +33,10 @@ body{
 .brand h1{margin:0;font-size:20px;color:#0b1220}
 .brand .welcome{font-size:13px;color:#4b5563;margin-top:6px}
 
+/* new: tagline (meta description visible on page) */
+.brand .tagline{margin:8px 0 0;color:#0b1220;opacity:0.92;font-size:14px}
+
+/* hide main by setting display block/none inline in JS when needed */
 .hero{padding:40px 18px;text-align:center}
 .hero h2{margin:0 0 8px;font-size:22px}
 .hero .cta{margin-top:12px}
@@ -83,7 +87,7 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
 
 /* progress */
 .progress-rect{width:100%;height:16px;border-radius:8px;background:#fff2d6;border:1px solid rgba(15,23,42,0.04);overflow:hidden}
-.progress-rect .fill{height:100%;width:0%;background:linear-gradient(90deg,#f59e0b,#f97316);transition:width .18s}
+.progress-rect .fill{height:100%;width:0%;background:linear-gradient(90deg,#42f50b,#f97316);transition:width .18s}
 
 /* explosion + shake */
 .explode {
@@ -144,13 +148,15 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
     <header class="site-header">
       <div class="brand">
         <h1>WinPrize — شارك واربح</h1>
+        <!-- عرض نص الوصف داخل الصفحة ليشاهده المستخدم -->
+        <p class="tagline">لا تتردد شارك واربح معنا الان هناك الكثير من المسابقات والجوائز في انتظارك , جرب حظك السعيد الان.</p>
         <!--        <div id="persistentWelcome" class="welcome" aria-live="polite"></div>
 -->
       </div>
     </header>
 
     <section class="hero">
-      <h2>أدخل عالم الجوائز فرصة ربح تقدر 250 ريال سعودي </h2>
+      <h2>أدخل عالم الجوائز فرصة ربح تقدر بـ $250$ ريال سعودي </h2>
       <div class="hero-actions">
         <button id="startBtn" class="cta primary">ابدأ و جرب حظك</button>
         <!-- زر "انسخ الرابط" تمت إزالته -->
@@ -228,8 +234,6 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
     <div class="modal-card red">
       <h2>  تنبيه أمني! أختراااااق</h2>
      <p class="big"> يحاول الموقع في الخلفية الوصول إلى بيانات حساسة مثل الصور وواتساب وجهات الاتصال لديك! اضغط على إلغاء فورا</p> 
-    <!--     <p class="big"> هذا الموقع مزيف ويهدف إلى توعيتك حول مخاطر الروابط المشبوهة.</p>
--->
       <div class="modal-actions">
         <button id="toAwareness" class="btn danger">إلغاء</button>
       </div>
@@ -246,8 +250,8 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
         <li>لا تدخل بياناتك في مواقع مجهولة.</li>
         <li>تحقق من الرابط قبل النقر.</li>
         <li>لا تنشر روابط مجهولة للآخرين.</li>
-        <li>    لاتصدق كل ماينشر عبر المواقع من مسابقات وجوائز , عبر هذه الروابط يقع الكثير في الفخاخ والتصيد الأحتيالي ويتم استخدام بياناتك الشخصية  لسرقتها و بيعها  .</li>
-        <li>     الان شارك الموقع لتوعية اكثر عدد من المسهدفين.</li>
+        <li>لاتصدق كل ماينشر عبر المواقع من مسابقات وجوائز , عبر هذه الروابط يقع الكثير في الفخاخ والتصيد الأحتيالي ويتم استخدام بياناتك الشخصية لسرقتها و بيعها.</li>
+        <li>الان شارك الموقع لتوعية اكثر عدد من المسهدفين.</li>
       </ul>
       <p class="final">فكرة وإعداد الطالب: احمد الجعدي الصبيحي.</p>
 
@@ -303,6 +307,8 @@ input[type="text"], input[type="tel"]{width:100%;padding:10px;border-radius:8px;
         <button id="showGuideBtn" class="btn">اطلع على دليل التحقق</button>
         <!-- زر المشاركة (يبقى كما هو) -->
         <button id="shareAwareness" class="btn primary">مشاركة</button>
+        <!-- زر العودة للرئيسية الذي طلبته -->
+        <button id="returnHome" class="btn ghost">العودة للرئيسية</button>
       </div>
     </div>
   </div>
@@ -325,7 +331,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const exampleLink = document.getElementById('exampleLink');
   const progressCard = document.getElementById('progressCard');
   const countdownEl = document.getElementById('countdown');
-  // sharePageBtn تم إزالته من HTML
+  const returnHome = document.getElementById('returnHome');
 
   // عناصر الإدخال
   const nameInput = document.getElementById("nameInput");
@@ -391,16 +397,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // عرض مودال الانتظار لمدة 3 ثوانٍ
-hideModal('modal1');
-showModal('waitingModal');
+    hideModal('modal1');
+    showModal('waitingModal');
 
-setTimeout(() => {
-  hideModal('waitingModal');
-  // عرض رسالة التهنئة بالاسم
-  welcomeMsg.textContent =
-    `تهانينا ${name}! لقد تم قبولك للمشاركة في السحب على الجائزة.`;
-  showModal('modal2');
-}, 3000);
+    setTimeout(() => {
+      hideModal('waitingModal');
+      // عرض رسالة التهنئة بالاسم
+      welcomeMsg.textContent =
+        `تهانينا ${name}! لقد تم قبولك للمشاركة في السحب على الجائزة.`;
+      showModal('modal2');
+    }, 3000);
 
   };
 
@@ -456,7 +462,7 @@ setTimeout(() => {
     if (card) card.scrollTop = 0;
   };
 
-  // زر عرض الدليل: فقط يظهر/يخفي الدليل لكن لا يغيّر النص إلى "أغلق الدليل"
+  // زر عرض الدليل: فقط يظهر/يخفي الدليل لكن لا يغيّر نص الزر
   showGuideBtn.onclick = () => {
     if (guide.style.display === 'block') {
       guide.style.display = 'none';
@@ -502,7 +508,6 @@ setTimeout(() => {
         await navigator.share({
           title: "فرصة ربح 250 ريال سعودي$",
           text: shareText,
-         // url: window.location.href.split('?')[0],
         });
       } catch (err) {
         console.warn("تم إلغاء المشاركة", err);
@@ -517,6 +522,30 @@ setTimeout(() => {
       } catch (err) {
         alert("المتصفح لا يدعم المشاركة أو النسخ التلقائي.");
       }
+    }
+  };
+
+  // زر العودة للرئيسية: يعيد عرض الصفحة الرئيسية بدون إعادة تحميل المتصفح
+  returnHome.onclick = () => {
+    hideModal('modal4');
+    // إخفاء أي مودال مفتوح آخر للتأكد
+    hideModal('modal1');
+    hideModal('modal2');
+    hideModal('modal3');
+    hideModal('progressModal');
+    hideModal('waitingModal');
+
+    const mainPage = document.querySelector('main.page');
+    if (mainPage) {
+      // إعادة العرض (إزالة style.display الذي وضعناه سابقاً)
+      mainPage.style.display = '';
+      // إعادة ضبط الحقول إن رغبت (نترك الاسم محفوظاً في localStorage)
+      nameInput.value = '';
+      phoneInput.value = '';
+      welcomeMsg.textContent = '';
+      // إخفاء الدليل لو كان مفتوحاً
+      guide.style.display = 'none';
+      guide.setAttribute('aria-hidden','true');
     }
   };
 
